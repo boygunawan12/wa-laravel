@@ -1,0 +1,63 @@
+
+@extends('index')
+@section('title')
+<h1>{{@$title}}</h1>
+@endsection
+
+@section('content')
+
+
+
+<div class="content">
+                <div class="page-inner">
+                    <div class="page-header">
+                        <h4 class="page-title">Welcome</h4>
+                        <ul class="breadcrumbs">
+                            <li class="nav-home">
+                                <a href="#">
+                                    <i class="flaticon-home"></i>
+                                </a>
+                            </li>
+                            <li class="separator">
+                                <i class="flaticon-right-arrow"></i>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Welcome</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+
+
+                <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Welcome</h4>
+                                </div>
+                                <div class="card-body">
+                                  
+<div class="content">
+                <div class="page-inner">
+                   
+                    <h3>Welcome to Your App!</h3>
+
+Thank you for building this application with sqltocrud.com, happy automation ⚡!
+
+
+</div>
+</div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+                @endsection
