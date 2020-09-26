@@ -175,11 +175,18 @@
 @push('scripts2')
 <script type="text/javascript">
     // alert("x");
-    var text1 = '628982382323';
+    var text1 = '628982382323'; 
 $(".device option").filter(function() {
     console.log(this.text);
     return this.text == text1; 
 }).attr('selected', true);
+
+
+        window.Laravel = {
+            'csrfToken': '{{ csrf_token() }}',
+            'user': '{{user()->id}}'
+        };
+
 
 
 Echo.private('on-message-'+window.Laravel.user).listen('OnMessage', function(e) {
