@@ -189,7 +189,7 @@ $(".device option").filter(function() {
 
 
 
-window.Echo.private('on-message-{{user()->id}}').listen('OnMessage', function(e) {
+window.Echo.channel('private-on-message-{{user()->id}}').listen('OnMessage', function(e) {
     // console.log("Wena!, a "+e.data.user_name + " le ha gustado uno de tus aportes");
     // console.log(e);
     console.log("x");
