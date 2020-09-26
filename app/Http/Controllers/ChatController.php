@@ -95,7 +95,9 @@ class ChatController extends Controller
         ];
         broadcast(new \App\Events\OnMessage($data));
 
-
+        return[
+            'success'=>true
+        ];
     }
    public function listJson(Request $request){
         $id = $request->id;
