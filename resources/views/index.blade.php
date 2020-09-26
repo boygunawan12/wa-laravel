@@ -626,6 +626,19 @@
         
         // var qrcode = new QRCode(document.getElementById("qrcode"), msg.data);
       });
+
+
+
+window.Echo.private('on-message-{{user()->id}}').listen('OnMessage', function(e) {
+    // console.log("Wena!, a "+e.data.user_name + " le ha gustado uno de tus aportes");
+    // console.log(e);
+    console.log("x");
+    // console.log(e);
+    load(e.data);
+
+});
+
+
   </script>
   @stack('scripts2')
 </body>
