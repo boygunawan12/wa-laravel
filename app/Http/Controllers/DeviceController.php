@@ -334,7 +334,7 @@ $save = $device->save();
     }
 
     public function list(){
-        $data = Device::select(['phone as text','id']);
+        $data = Device::select(['phone as text','id'])->where('userid',user()->id);
 
         return $data->get();
     }
