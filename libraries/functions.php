@@ -23,8 +23,10 @@ function getChats($chats){
                 $messages = end($chatData->messages);
 
                 // print_r($chatData);
+                $jid = explode('@', $chatData->jid);
                 $results[] = [
                     'jid'=>$chatData->jid,
+                    'id'=>$jid[0],
                     'name'=>@$chatData->name,
                     'avatarUrl'=>@$chatData->imgUrl,
                     'message'=>[

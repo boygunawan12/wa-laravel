@@ -33,7 +33,11 @@
                             <div class="card">
 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title">List Chat</div>
+                                        <div class="card-title"><span style="float: left;">List Chat</span>
+                                            <div class="wrap-loading" style="float: left;">
+                                                
+                                            </div>
+                                        </div>
                                         <div class="card-tools">
 
                                             <select style="width: 500px;" class="form-control select2 device" data-url="{{ url('device/list') }}">
@@ -70,8 +74,9 @@
     .lds-ripple {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 20px;
+  float: left;
+  height: 20px;
 }
 .lds-ripple div {
   position: absolute;
@@ -115,7 +120,7 @@
     function load(val){
                // var val = $(this).val();
 
-        $(".result").html('<center><div class="lds-ripple"><div></div><div></div></div></center>');
+        $(".wrap-loading").html('<i class="fas fa-circle-notch fa-spin"></i>');
         $.ajax({
             url: '{{ url('chat/list') }}',
             type: 'POST',
@@ -135,15 +140,21 @@
                 for (var i = 0; i < res.data.length; i++) {
                     // Things[i]
                     var data = res.data[i];
+                    // console.log(data.avatarUrl);
+                    var name = (data.name == null ? data.jid : data.name);
+
+                    var img = (data.avatarUrl.length == 0 ? "{{ url('assets/img/blank-profile.png') }}" : data.avatarUrl );
                     html += '<tr>';
-                    html += '<td><img style="width:50px;height:50px;border-radius:50%;" src="'+data.avatarUrl+'" class="img  float-left"><b>'+data.name+'</b> <br>'+data.jid+'</td>';
-                    html += '<td>'+data.message.conversation+'</td>';
+                    html += '<td><img style="width:50px;height:50px;border-radius:50%;" src="'+img+'" class="img  float-left"><b>'+name+'</b> </td>';
+                    html += '<td class="conv-'+data.id+'">'+data.message.conversation+'</td>';
                     html += '<td>'+data.message.messageTimestamp+'</td>';
                     html += '</tr>';
                 }
 
                 html += '</table>';
                 $(".result").html(html);
+                $(".wrap-loading").html("");
+
             }
             else{
                  $.notify({
@@ -155,7 +166,7 @@
                                   type: 'danger'
                                 });
 
-                $(".result").html("");
+                $(".wrap-loading").html("");
 
 
             }
@@ -188,6 +199,21 @@ $(".device option").filter(function() {
         };
 
 
+Echo.private('on-message-{{user()->id}}').listen('OnMessage', function(e) {
+    // console.log("Wena!, a "+e.data.user_name + " le ha gustado uno de tus aportes");
+    // console.log(e);
+    // console.log("x");
+    // console.log(e);
+    var jid = e.jid;
+    var chat = e.chat;
+    var arr = jid.split("@");
+    var newJid = arr[0];
+    // console.log(newJid);
+    $(".conv-"+newJid).html(chat);
+
+    // load(e.data);
+
+});
 </script>
     {{-- expr --}}
 @endpush

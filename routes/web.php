@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/chat/send-on-message', 'ChatController@onMessage');
 
+Route::post('chat/incomingMessage', 'ChatController@incomingMessage');
+
 Route::group(['prefix' => '/','middleware'=>['authUser']], function($d) {
 
 Route::get('/', function() {

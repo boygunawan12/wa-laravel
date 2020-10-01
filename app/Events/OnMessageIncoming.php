@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class OnMessage implements ShouldBroadcastNow
+class OnMessageIncoming implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -25,7 +25,8 @@ class OnMessage implements ShouldBroadcastNow
     public function __construct($data)
     {
         //
-        $this->data = $data;
+        $this->jid = $data['jid'];
+        $this->conversation = $data['conversation'];
     }
 
     /**
@@ -43,9 +44,8 @@ class OnMessage implements ShouldBroadcastNow
     public function broadcastWith()
 {
     return [
-        'data' => $this->data['phone'],
-        'chat' => $this->data['chat'],
-        'jid' => $this->data['jid'],
+        'data' => $this->data['jid'],
+        'conversation' => $this->data['conversation'],
     ];
 }
 }

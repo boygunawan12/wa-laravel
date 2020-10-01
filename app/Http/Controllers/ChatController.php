@@ -91,7 +91,9 @@ class ChatController extends Controller
         $deviceData = $device->first();
          $data =[
             'phone'=>$deviceData->id,
-            'userid'=>$deviceData->userid
+            'userid'=>$deviceData->userid,
+            'chat'=>$request->chat,
+            'jid'=>$request->jid
         ];
         broadcast(new \App\Events\OnMessage($data));
 
@@ -107,13 +109,14 @@ class ChatController extends Controller
 
           $response = Http::get('http://localhost:3000/chat/load', [
                 'phone' => $phone,
+                'load'=>true,
                 // 'fromDevice' => $fromDevice,
                 // 'message' => $message,
             ]);
 
 
         $body =$response->body();
-
+        
         $decode = json_decode($body);
         // print_r($decode);
         $status = @$decode->status;
@@ -131,10 +134,10 @@ class ChatController extends Controller
 
         }
 
-        $chat = new Chat;
-        $chat->response = $body;
-        $chat->userid = user()->id;
-        $chat->save();
+        // $chat = new Chat;
+        // $chat->response = $body;
+        // $chat->userid = user()->id;
+        // $chat->save();
 
         $decode = json_decode($body);
 
@@ -157,6 +160,16 @@ class ChatController extends Controller
             ];
         }
         // return $results;
+
+   }
+   public function incomingMessage(Request $request){
+
+        $data  = [
+            'jid'=>$request->jid,
+            'conversation'=>$request->conversation
+        ];
+
+        broadcast(new \App\Events\OnMessageIncoming($data));
 
    }
 }
