@@ -6,6 +6,8 @@ use DataTables;
 use App\Device; 
 use App\Chat; 
 use Illuminate\Support\Facades\Http;
+use Str;
+use App\User;
 
 
 
@@ -17,6 +19,14 @@ class ChatController extends Controller
 {
    public function index(){
 
+        $token = user()->token;
+
+    if (empty($token)) {
+        # code...
+echo $newToken = Str::random(10);
+
+        User::where('id',user()->id)->update(['token'=>$newToken]);
+    }
     return view('chat/index');
    }
 
