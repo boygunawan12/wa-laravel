@@ -23,7 +23,7 @@ class ChatController extends Controller
 
     if (empty($token)) {
         # code...
-echo $newToken = Str::random(10);
+ $newToken = Str::random(10);
 
         User::where('id',user()->id)->update(['token'=>$newToken]);
     }
