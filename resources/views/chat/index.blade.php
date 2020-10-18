@@ -40,11 +40,14 @@
     
         <div class="row">
         <div class="col-lg-6">
-    <form id="form" onsubmit="return false">
-
+    <form id="form" onsubmit="return false" enctype="multipart/form-data">
+{{--     $deviceId = $request->deviceId;
+        $message = $request->message;
+        $phone = $request->phone;
+        $file = $request->file('file'); --}}
             <div class="form-group">
                 <label>Device</label>
-                <select name="fromDevice" class="select2 form-control" data-url="{{ url('device/list') }}"></select>
+                <select name="deviceId" class="select2 form-control" data-url="{{ url('device/list') }}"></select>
             </div>
 
             <div class="form-group">
@@ -56,6 +59,12 @@
                 <label>Message</label>
                 <textarea class="form-control" name="message"></textarea>
             </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" name="file" class="form-control">
+            </div>
+            
             <div class="form-group">
             <button class="btn btn-primary btn-send btn-sm">Send</button>
                 
@@ -90,13 +99,19 @@
                     $(document).on('click', '.btn-send', function() {
                         // event.preventDefault();
                         $(this).attr('disabled','disabled');
-                        var form = $("#form").serialize();
+  var formData = new FormData($("#form")[0]);
 
                         $.ajax({
-                            url: '{{ url('chat/send') }}',
+                            headers:{
+                                'x-token-access':"{{user()->token}}"
+                            },
+                            url: '{{ url('api/chat/sendMedia') }}',
                             type: 'POST',
                             dataType: 'JSON',
-                            data: form,
+                            data: formData,
+                            
+            contentType: false,
+            processData: false,
                         })
                         .done(function(res) {
                             // console.log(res)

@@ -51,6 +51,8 @@ Route::get('test-broadcast', function(){
 
 
 Route::get("/chat","ChatController@index");
+Route::get("/profile","ProfileController@profile");
+
 Route::get("/chat/list","ChatController@list");
 Route::post("/chat/list","ChatController@listJson");
 Route::post("/chat/send","ChatController@send");

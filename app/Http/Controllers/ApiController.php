@@ -66,6 +66,8 @@ class ApiController extends Controller
 
     }
       public function sendMedia(Request $request){
+        // print_r($request->all());
+        // exit();
         $deviceId = $request->deviceId;
         $message = $request->message;
         $phone = $request->phone;
@@ -85,6 +87,11 @@ class ApiController extends Controller
         }
         $fromDevice = $device->first()->phone;
 
+
+
+        if (!empty($file)) {
+            # code...
+
         $original_name = $file->getClientOriginalName();
 
         $file->move(public_path('uploads'),$original_name);
@@ -94,7 +101,7 @@ class ApiController extends Controller
 
         $response = Http::attach(
     'file', $photo
-)->post('http://localhost:3000/chat/sendMedia?phone='.$phone.'&fromDevice='.$fromDevice.'&message='.$message.'" ', [
+)->post('http://localhost:3000/chat/sendMedia?phone='.$phone.'&fromDevice='.$fromDevice.'&message='.$message.' ', [
                 'phone' => $phone,
                 'fromDevice' => $fromDevice,
                 'message' => $message,
@@ -102,10 +109,27 @@ class ApiController extends Controller
         // print_r($response);
 
         $body =$response->body();
-        print_r($body);
+        // print_r($body);
         $decode = json_decode($body);
         // print_r($decode);
         @$status = $decode->status;
+        }
+        else{
+
+              $response = Http::get('http://localhost:3000/chat/send', [
+                'phone' => $phone,
+                'fromDevice' => $fromDevice,
+                'message' => $message,
+            ]);
+        // print_r($response);
+
+        $body =$response->body();
+        $decode = json_decode($body);
+        // print_r($decode);
+        $status = @$decode->status;
+
+
+        }
 
 
         if ($status==401) {
