@@ -318,7 +318,7 @@ $validator = \Validator::make(
 $input_data, 
 
 [
-"file" => 'image|required',
+"file" => 'required',
 'message'=>'required',
 'from'=>'required',
 'to'=>'required'
