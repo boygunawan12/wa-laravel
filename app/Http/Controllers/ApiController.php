@@ -35,7 +35,7 @@ class ApiController extends Controller
         }
 
 
-        $fromDevice = $device->first()->phone;
+        $fromDevice = $deviceData->first()->phone;
 
 
 
