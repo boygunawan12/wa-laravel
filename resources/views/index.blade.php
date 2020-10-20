@@ -385,7 +385,7 @@
 
         setTimeout(function(){
           location.reload();
-        },5000);
+        },1000);
         // qrcode.makeCode(msg.data);
 
 
