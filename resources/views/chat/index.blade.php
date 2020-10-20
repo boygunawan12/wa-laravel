@@ -76,7 +76,7 @@
 
             <div class="form-group">
                 <label>Phone</label>
-                <input type="to" name="phone" class="form-control">
+                <input type="text" name="to" class="form-control">
             </div>
 
             <div class="form-group">
