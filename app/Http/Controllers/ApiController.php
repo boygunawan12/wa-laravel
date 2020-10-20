@@ -17,12 +17,39 @@ use Illuminate\Support\Facades\Http;
 class ApiController extends Controller
 {
     public function sendMessage(Request $request){
-        $deviceId = $request->device;
+        $deviceId = $request->from;
         $message = $request->message;
         $userid = $request->user->id;
 
-        $phone = $request->phone.'@s.whatsapp.net';
+        $phone = $request->to.'@s.whatsapp.net';
       
+
+// exit();
+
+$input_data = $request->all();
+
+$validator = \Validator::make(
+$input_data, 
+
+[
+// "file" => 'image|required',
+'message'=>'required',
+'from'=>'required',
+'to'=>'required'
+
+]
+);
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
+
+
+    return [
+        'success'=>false,
+        'msg'=>$messages
+    ];
+}
+
         $deviceData  = Device::where(['phone'=>$deviceId,'userid'=>$userid]);
 
         if ($deviceData->count()==0) {
@@ -35,13 +62,7 @@ class ApiController extends Controller
         }
 
 
-        $fromDevice = $deviceData->first()->phone;
-
-
-
-
-
-
+    $fromDevice = $deviceData->first()->phone;
 
 
     $user = $request->user;
@@ -101,25 +122,38 @@ class ApiController extends Controller
         // print_r($request->all());
 
         // exit();
-        $device = $request->device;
+        $device = $request->from;
         $userid = $request->user->id;
         $message = $request->message;
-        $phone = $request->phone;
+        $phone = $request->to;
         $file = $request->file('file');
 
 
 
-    $validatedData = $request->validate([
-"file" => 'image',
+
+$input_data = $request->all();
+
+$validator = \Validator::make(
+$input_data, 
+
+[
+"file" => 'image|required',
 'message'=>'required',
-'device'=>'required'
+'from'=>'required',
+'to'=>'required'
 
-]);
+]
+);
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
 
 
-
-        // print_r($userid);
-        // exit();
+    return [
+        'success'=>false,
+        'msg'=>$messages
+    ];
+}
 
 
     $user = $request->user;
@@ -150,6 +184,7 @@ class ApiController extends Controller
             ];
         }
         $fromDevice = $deviceData->first()->phone;
+
 
 
 
@@ -238,14 +273,54 @@ class ApiController extends Controller
    // print_r($request->all());
 
         // exit();
-        $device = $request->device;
+        $device = $request->from;
         $userid = $request->user->id;
         $message = $request->message;
-        $phone = $request->phone;
+        $phone = $request->to;
         $file = $request->file('file');
 
         // print_r($userid);
         // exit();
+
+
+
+
+$input_data = $request->all();
+
+$validator = \Validator::make(
+$input_data, 
+
+[
+"file" => 'image|required',
+'message'=>'required',
+'from'=>'required',
+'to'=>'required'
+
+]
+);
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
+
+
+    return [
+        'success'=>false,
+        'msg'=>$messages
+    ];
+}
+
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
+
+
+    return [
+        'success'=>false,
+        'msg'=>$messages
+    ];
+}
+
+
 
 
     $user = $request->user;
@@ -295,7 +370,7 @@ class ApiController extends Controller
 
         $response = Http::attach(
     'file', $photo
-)->post('http://localhost:3000/chat/sendDocument?phone='.$phone.'@s.whatsapp.net&'.'&fromDevice='.$fromDevice.'&message='.$message.'&extension='.$extension, [
+)->post('http://localhost:3000/chat/sendDocument?phone='.$phone.'@s.whatsapp.net&'.'&fromDevice='.$fromDevice.'&message='.$message.'&extension='.$extension.'&original_name='.$original_name, [
                 'phone' => $phone,
                 'fromDevice' => $fromDevice,
                 'message' => $message,

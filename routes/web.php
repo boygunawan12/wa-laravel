@@ -81,6 +81,6 @@ Route::group(['prefix' => 'api','middleware'=>'ApiMiddleware'], function() {
     Route::post('chat/sendMedia', 'ApiController@sendMedia');
     Route::post('chat/sendDocument', 'ApiController@sendDocument');
 
-
 });
+
 

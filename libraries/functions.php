@@ -14,6 +14,8 @@ function user($id=null){
 
 function getChats($chats){
 
+
+    // print_r($chats);
         if (!empty($chats)) {
             # code...
             $results = [];
@@ -32,7 +34,8 @@ function getChats($chats){
                     'avatarUrl'=>@$chatData->imgUrl,
                     'message'=>[
                         'conversation'=>@$messages->message->conversation,
-                        'messageTimestamp'=>@$messages->messageTimestamp
+                        'messageTimestamp'=>@$messages->messageTimestamp,
+                        'status'=>@$messages->status,
                     ]
                 ];
                 
