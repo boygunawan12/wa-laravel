@@ -69,14 +69,14 @@
         $file = $request->file('file'); --}}
             <div class="form-group">
                 <label>Device</label>
-                <select name="device" class="select2 form-control" data-url="{{ url('device/list') }}"></select>
+                <select name="from" class="select2 form-control" data-url="{{ url('device/list') }}"></select>
             </div>
 
 
 
             <div class="form-group">
                 <label>Phone</label>
-                <input type="text" name="phone" class="form-control">
+                <input type="ro" name="phone" class="form-control">
             </div>
 
             <div class="form-group">
@@ -167,7 +167,7 @@
                                     });
 
   $(".btn-send").removeAttr('disabled');
-                                    
+
 
 
                             }

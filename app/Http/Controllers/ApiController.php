@@ -133,28 +133,6 @@ if ($validator->fails()) {
 
 $input_data = $request->all();
 
-$validator = \Validator::make(
-$input_data, 
-
-[
-"file" => 'image|required',
-'message'=>'required',
-'from'=>'required',
-'to'=>'required'
-
-]
-);
-
-if ($validator->fails()) {
-    $messages = $validator->messages();
-
-
-    return [
-        'success'=>false,
-        'msg'=>$messages
-    ];
-}
-
 
     $user = $request->user;
     $quota = $user->quota;
@@ -194,6 +172,30 @@ if ($validator->fails()) {
         if (!empty($file)) {
             # code...
 
+
+$validator = \Validator::make(
+$input_data, 
+
+[
+"file" => 'image|required',
+'message'=>'required',
+'from'=>'required',
+'to'=>'required'
+
+]
+);
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
+
+
+    return [
+        'success'=>false,
+        'msg'=>$messages
+    ];
+}
+
+
         $original_name = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
 
@@ -224,6 +226,31 @@ if ($validator->fails()) {
         @$status = $decode->status;
         }
         else{
+
+
+$validator = \Validator::make(
+$input_data, 
+
+[
+// "file" => 'image|required',
+'message'=>'required',
+'from'=>'required',
+'to'=>'required'
+
+]
+);
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
+
+
+    return [
+        'success'=>false,
+        'msg'=>$messages
+    ];
+}
+
+
 
         $sendTo = $phone.'@s.whatsapp.net';
         // $sendTo = '6281215416084-1564231374@g.us';
