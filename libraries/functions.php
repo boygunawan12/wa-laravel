@@ -36,6 +36,7 @@ function getChats($chats){
                         'conversation'=>@$messages->message->conversation,
                         'messageTimestamp'=>@$messages->messageTimestamp,
                         'status'=>@$messages->status,
+                        'fromMe'=>@$messages->key->fromMe,
                     ]
                 ];
                 

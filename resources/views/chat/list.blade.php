@@ -144,11 +144,23 @@
                     var name = (data.name == null ? data.jid : data.name);
 
                     var img = (data.avatarUrl.length == 0 ? "{{ url('assets/img/blank-profile.png') }}" : data.avatarUrl );
+
+                    if(data.message.fromMe){
+
                     html += '<tr>';
                     html += '<td><img style="width:50px;height:50px;border-radius:50%;" src="'+img+'" class="img  float-left"><b>'+name+'</b><br><span style="font-size:10px;">'+data.jid+'</span> </td>';
                     html += '<td class="conv-'+data.id+'">'+data.message.conversation+' ('+data.message.status+')</td>';
                     html += '<td>'+data.message.messageTimestamp+'</td>';
+                    html += '</tr>';   
+                    }
+                    else{
+
+                    html += '<tr>';
+                    html += '<td><img style="width:50px;height:50px;border-radius:50%;" src="'+img+'" class="img  float-left"><b>'+name+'</b><br><span style="font-size:10px;">'+data.jid+'</span> </td>';
+                    html += '<td class="conv-'+data.id+'">'+data.message.conversation+'</td>';
+                    html += '<td>'+data.message.messageTimestamp+'</td>';
                     html += '</tr>';
+                    }
                 }
 
                 html += '</table>';
