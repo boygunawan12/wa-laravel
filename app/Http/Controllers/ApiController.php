@@ -397,7 +397,7 @@ if ($validator->fails()) {
 
         $response = Http::attach(
     'file', $photo
-)->post('http://localhost:3000/chat/sendDocument?phone='.$phone.'@s.whatsapp.net&'.'&fromDevice='.$fromDevice.'&message='.$message.'&extension='.$extension.'&original_name='.$original_name, [
+)->post('http://localhost:3000/chat/sendDocument?phone='.$phone.'@s.whatsapp.net&'.'&fromDevice='.$fromDevice.'&message='.$message.'&extension='.$extension.'&fileName='.$original_name, [
                 'phone' => $phone,
                 'fromDevice' => $fromDevice,
                 'message' => $message,
