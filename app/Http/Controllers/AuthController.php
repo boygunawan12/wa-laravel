@@ -369,7 +369,7 @@ class AuthController extends Controller
     'userid' => $userData->id,
     'token' => $token
   ]);
-
+  
   \Mail::to($userData->email)->send(new ForgotPassword($userData));
 
 
