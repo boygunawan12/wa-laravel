@@ -7,6 +7,7 @@ use App\Device;
 use App\Chat; 
 use Illuminate\Support\Facades\Http;
 use Str;
+use App\User;
 
 
 
