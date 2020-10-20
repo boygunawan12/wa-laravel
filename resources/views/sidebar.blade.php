@@ -98,7 +98,7 @@
 
 
 						<li class="nav-item {{sidebarActive('documentation')}}">
-							<a href="{{ url("documentation") }}">
+							<a href="https://documenter.getpostman.com/view/7844430/TVYAggS4" target="_blank">
 							<i class="fas fa-users"></i> 
 								<p>Documentation</p>
 							</a>
