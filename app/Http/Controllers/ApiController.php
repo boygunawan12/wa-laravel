@@ -22,7 +22,18 @@ class ApiController extends Controller
         $userid = $request->user->id;
 
         $phone = $request->phone.'@s.whatsapp.net';
-        $device  = Device::where('phone',$deviceId);
+      
+        $deviceData  = Device::where(['phone'=>$deviceId,'userid'=>$userid]);
+
+        if ($deviceData->count()==0) {
+            # code...
+
+            return [
+                'success'=>false,
+                'msg'=>'Device Not Found'
+            ];
+        }
+
 
         $fromDevice = $device->first()->phone;
 
