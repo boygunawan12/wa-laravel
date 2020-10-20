@@ -9,9 +9,10 @@
 
 
 <div class="content">
+
                 <div class="page-inner">
                     <div class="page-header">
-                        <h4 class="page-title">device</h4>
+                        <h4 class="page-title">Devices</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
                                 <a href="#">
@@ -22,7 +23,7 @@
                                 <i class="flaticon-right-arrow"></i>
                             </li>
                             <li class="nav-item">
-                                <a href="#">device</a>
+                                <a href="#">devices</a>
                             </li>
                         </ul>
                     </div>
@@ -30,17 +31,20 @@
 
 
                 <div class="col-md-12">
+
+                  <div class="alert alert-info">
+                      After adding a cellphone number, you can connect to WhatsApp by clicking the <b>QR code  icon</b>
+                  </div>
+         
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">device</h4>
+                                    <h4 class="card-title">devices</h4>
                                 </div>
                                 <div class="card-body">
                                   <div class="table-responsive">
                   <button data-title="Create Data" data-src="{{ url('device/create') }}" class="btn btn-primary create-btn">Create</button>
 
 
-                  
-         
                <table class="table table-striped" id="table">
   <thead>
      <th>phone</th>

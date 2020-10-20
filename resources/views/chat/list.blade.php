@@ -11,7 +11,7 @@
 <div class="content">
                 <div class="page-inner">
                     <div class="page-header">
-                        <h4 class="page-title">Welcome</h4>
+                        <h4 class="page-title">List Chat</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
                                 <a href="#">
@@ -22,7 +22,7 @@
                                 <i class="flaticon-right-arrow"></i>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Welcome</a>
+                                <a href="#">list chat</a>
                             </li>
                         </ul>
                     </div>
@@ -145,7 +145,7 @@
 
                     var img = (data.avatarUrl.length == 0 ? "{{ url('assets/img/blank-profile.png') }}" : data.avatarUrl );
                     html += '<tr>';
-                    html += '<td><img style="width:50px;height:50px;border-radius:50%;" src="'+img+'" class="img  float-left"><b>'+name+'</b> </td>';
+                    html += '<td><img style="width:50px;height:50px;border-radius:50%;" src="'+img+'" class="img  float-left"><b>'+name+'</b><br><span style="font-size:10px;">'+data.jid+'</span> </td>';
                     html += '<td class="conv-'+data.id+'">'+data.message.conversation+'</td>';
                     html += '<td>'+data.message.messageTimestamp+'</td>';
                     html += '</tr>';

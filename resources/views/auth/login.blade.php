@@ -1,6 +1,6 @@
 @extends('auth.auth')
 @section('title')
-<title>Sqltocrud - Login</title>
+<title>Pesan.digital - Login</title>
 
     {{-- expr --}}
 @endsection
@@ -62,10 +62,10 @@
 
  <div class="d-flex justify-content-center">
                     <span class="mr-2 text-white">Don't have an account?</span>
-                    <a href="{{ url('register') }}">Sign Up</a>
+                    <b><a class="text-white" href="{{ url('register') }}">Sign Up</a></b>
                 </div>
                     <br>
-                    <a href="{{ url('forgot-password') }}">I forgot the password</a>
+                    
 
 
 

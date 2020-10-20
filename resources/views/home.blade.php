@@ -39,9 +39,9 @@
 <div class="content">
                 <div class="page-inner">
                    
-                    <h3>Welcome to Your App!</h3>
+                    <h3>Welcome</h3>
 
-Thank you for building this application with sqltocrud.com, happy automation ⚡!
+Welcome to pesan.digital 
 
 
 </div>

@@ -21,11 +21,13 @@ class StateOpen implements ShouldBroadcastNow
      */
 
     public $phone;
+    public $userid;
 
-    public function __construct($phone)
+    public function __construct($phone,$userid)
     {
         //
         $this->phone = $phone;
+        $this->userid = $userid;
     }
 
     /**
@@ -35,7 +37,9 @@ class StateOpen implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('state-open');
+        // return new Channel('state-open');
+            return new PrivateChannel('state-open-'.$this->userid);
+
     }
 
     public function broadcastWith()

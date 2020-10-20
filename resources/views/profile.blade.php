@@ -36,9 +36,6 @@
                           <td>Token</td><td>{{user()->token}}</td>
                       </tr>
 
-                      <tr>
-                          <td>Quota Left</td><td>{{user()->token}}</td>
-                      </tr>
                   </table>
               </div>
 

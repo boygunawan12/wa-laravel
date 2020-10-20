@@ -3,7 +3,7 @@
 <head>
 	<title></title>
 	 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>whatsapi-231c67c0-f4ff-11ea-bc13-4d79f46ba561</title>
+  <title>Login</title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
       <meta name="csrf-token" content="{{ csrf_token() }}">
 

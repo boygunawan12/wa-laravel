@@ -8,6 +8,7 @@ use App\Chat;
 use Illuminate\Support\Facades\Http;
 use Str;
 use App\User;
+use App\ChatSend;
 
 
 
@@ -19,7 +20,9 @@ class ChatController extends Controller
 {
    public function index(){
 
-        $token = user()->token;
+        $user = user();
+        $token = $user->token;
+        $quota = $user->quota;
 
     if (empty($token)) {
         # code...
@@ -27,7 +30,12 @@ class ChatController extends Controller
 
         User::where('id',user()->id)->update(['token'=>$newToken]);
     }
-    return view('chat/index');
+
+
+    $quotaLeft =  $quota-ChatSend::where('userid',$user->id)->count();
+
+
+    return view('chat/index',compact('quotaLeft'));
    }
 
    public function send(Request $request){
@@ -37,6 +45,11 @@ class ChatController extends Controller
     $fromDeviceId = $request->fromDevice;
     $device = Device::find($fromDeviceId);
     $fromDevice =$device->phone;
+
+
+
+
+
 
 
             $response = Http::get('http://localhost:3000/chat/send', [
@@ -76,20 +89,6 @@ class ChatController extends Controller
 
    public function list(Request $request){
 
-        $chat = Chat::find(1);
-        $response = $chat->response;
-
-        $decode = json_decode($response);
-        // print_r($decode);
-        $chats = $decode->chats;
-        // $chats = json_decode($chats);
-
-        $chats = getChats($chats);
-
-        // print_r($chats);
-        // return $chats;
-        // print_r($results);
-        
 
         return view('chat.list');
    }
@@ -113,8 +112,8 @@ class ChatController extends Controller
     }
    public function listJson(Request $request){
         $id = $request->id;
-        $device = Device::find($id);
-        $phone = $device->phone;
+        // $device = Device::find($id);
+        $phone = $request->id;
 
 
           $response = Http::get('http://localhost:3000/chat/load', [
@@ -144,14 +143,9 @@ class ChatController extends Controller
 
         }
 
-        // $chat = new Chat;
-        // $chat->response = $body;
-        // $chat->userid = user()->id;
-        // $chat->save();
 
         $decode = json_decode($body);
 
-        // print_r($decode);
         $chats = $decode->chats;
 
         $results = getChats($chats);

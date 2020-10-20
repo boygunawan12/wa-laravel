@@ -1,4 +1,5 @@
 <?php 
+use Illuminate\Support\Facades\Http;
 
 function user($id=null){
 
@@ -41,4 +42,52 @@ function getChats($chats){
         else{
             return null;
         }
+}
+
+function sendChat($userid){
+
+    $chatSend = new App\ChatSend;
+    $chatSend->userid = $userid;
+    $chatSend->chat = 'message';
+    $chatSend->save();
+
+}
+
+
+function checkPhoneIsConnected($userid){
+// 
+
+    $device = App\Device::where('userid',$userid);
+
+    if ($device->count()) {
+
+        foreach ($device->get() as $d) {
+            # code...
+
+       $response = Http::get('http://localhost:3000/chat/isConnected?phone=6285156838407', [
+                'phone' => $d->phone,
+                // 'userid' => user()->id,
+                // 'page' => 1,
+            ]);
+
+        $body =$response->body();
+        // print_r($body);
+        $decode = json_decode($body);
+
+        // print_r($decode);
+
+        if (!$decode->isConnected) {
+            # code...
+                App\Device::where('id',$d->id)->update(['status'=>'0']);
+        }
+        }
+        # code...
+    }
+}
+
+
+function sidebarActive($param){
+
+    return (Request::segment(1)==$param ? 'active' : '');
+
 }

@@ -41,6 +41,13 @@ Route::get("/device/json","DeviceController@json")->name("device.json");
 
 Route::resource("/device","DeviceController");
 
+Route::get("/users/json","UserController@json")->name("users.json");
+Route::resource("/users","UserController");
+
+
+Route::get("/affiliates/json","AffiliateController@json")->name("affiliates.json");
+Route::resource("/affiliates","AffiliateController");
+
 
 Route::get('test-broadcast', function(){
     broadcast(new \App\Events\SendQr("x"));
@@ -53,15 +60,16 @@ Route::get('test-broadcast', function(){
 Route::get("/chat","ChatController@index");
 Route::get("/profile","ProfileController@profile");
 
-Route::get("/chat/list","ChatController@list");
+Route::get("/chat-list","ChatController@list");
 Route::post("/chat/list","ChatController@listJson");
 Route::post("/chat/send","ChatController@send");
 
 });
+Route::post('device/send-qr', 'DeviceController@sendQr');
+
 Route::get("/device/getQr","DeviceController@getQr")->name("device.getQr");
 Route::get("/device/{id}/pair","DeviceController@pair")->name("device.pair");
 
-Route::post('device/send-qr', 'DeviceController@sendQr');
 Route::post('device/send-state-open', 'DeviceController@connect');
 Route::get('/user/verify/{token}', 'AuthController@verifyUser');
 
@@ -71,4 +79,8 @@ Route::group(['prefix' => 'api','middleware'=>'ApiMiddleware'], function() {
     //
     Route::post('chat/send', 'ApiController@sendMessage');
     Route::post('chat/sendMedia', 'ApiController@sendMedia');
+    Route::post('chat/sendDocument', 'ApiController@sendDocument');
+
+
 });
+

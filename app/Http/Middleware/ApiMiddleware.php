@@ -15,12 +15,17 @@ class ApiMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,$guard=null)
     {
         $token = $request->header('x-token-access');
 
         $user = User::where('token',$token);
 
+        $request->merge(['user' => $user->first() ]);
+
+        // print_r($request->user);
+        // $request->auth = "xx";
+        // echo "string";
         if ($user->count()==0) {
             # code...
             $response= [
@@ -33,6 +38,7 @@ class ApiMiddleware
 
 
         }
+
 
         return $next($request);
     }

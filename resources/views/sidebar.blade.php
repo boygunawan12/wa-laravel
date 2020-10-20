@@ -5,13 +5,13 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="{{ url('assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
+									{{user()->name}}
+									<span class="user-level">User</span>
 									<span class="caret"></span>
 								</span>
 							</a>
@@ -20,18 +20,18 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
+										<a href="{{ url('profile') }}">
 											<span class="link-collapse">My Profile</span>
 										</a>
 									</li>
-									<li>
+									{{-- <li>
 										<a href="#edit">
 											<span class="link-collapse">Edit Profile</span>
 										</a>
-									</li>
+									</li> --}}
 									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
+										<a href="{{ url('logout') }}">
+											<span class="link-collapse">Logout</span>
 										</a>
 									</li>
 								</ul>
@@ -49,43 +49,63 @@
 		
 						<li class="nav-item">
 							<a href="{{ url("/") }}">
-							
+														<i class="fas fa-home"></i> 
+
 								<p>Home</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item {{sidebarActive('device')}}">
 							<a href="{{ url("device") }}">
 							<i class="fas fa-mobile"></i> 
-								<p>device</p>
+								<p>Devices</p>
 							</a>
 						</li>
 
-					<li class="nav-item submenu">
-							<a data-toggle="collapse" href="#forms" class="" aria-expanded="true">
-								<i class="fas fa-inbox"></i>
-								<p>Chat</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse " id="forms" style="">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="{{ url('chat') }}">
-											<span class="sub-item">Send</span>
-										</a>
-									</li>
 
-									<li>
-										<a href="{{ url('chat/list') }}">
-										
-											<span class="sub-item">List</span>
-										</a>
-									</li>
-								</ul>
-							</div>
+						<li class="nav-item {{sidebarActive('chat')}}">
+							<a href="{{ url("chat") }}">
+							<i class="fas fa-paper-plane"></i> 
+								<p>Send Chat</p>
+							</a>
+						</li>
+
+
+
+						<li class="nav-item {{sidebarActive('chat-list')}}">
+							<a href="{{ url("chat-list") }}">
+							<i class="fas fa-inbox"></i> 
+								<p>List Chat</p>
+							</a>
+						</li>
+
+
+
+
+
+						@if (user()->role==1)
+							{{-- expr --}}
+
+
+
+						<li class="nav-item {{sidebarActive('users')}}">
+							<a href="{{ url("users") }}">
+							<i class="fas fa-users"></i> 
+								<p>Users</p>
+							</a>
+						</li>
+
+						@endif
+
+
+						<li class="nav-item {{sidebarActive('documentation')}}">
+							<a href="{{ url("documentation") }}">
+							<i class="fas fa-users"></i> 
+								<p>Documentation</p>
+							</a>
 						</li>
 
 {{-- 
-
+	
 						<li class="nav-item">
 							<a href="{{ url("chat") }}">
 							<i class="fas fa-inbox"></i> 

@@ -37,6 +37,27 @@ class AuthUser
 
 
             }
+
+              $currentAction = \Request::segment(1);
+
+
+    
+             $currentAction = \Request::segment(1);
+
+
+        // print_r($currentAction);
+              $user = user();
+
+
+              if ($currentAction=='users') {
+                # code...
+
+                if ($user->role!=1) {
+                  # code...
+                  return abort(404);
+                }
+              }
+              
             return $next($request);
               
             
@@ -61,8 +82,23 @@ class AuthUser
             // echo user()->poli;
             // return 'ok';
 
-           
-                return $next($request);    
+             $currentAction = \Request::segment(1);
+
+
+        // print_r($currentAction);
+              $user = user();
+
+
+              if ($currentAction=='users') {
+                # code...
+
+                if ($user->role!=1) {
+                  # code...
+                  return abort(404);
+                }
+              }
+
+              return $next($request);    
             
             
         }

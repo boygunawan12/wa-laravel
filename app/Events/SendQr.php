@@ -21,11 +21,13 @@ class SendQr implements ShouldBroadcastNow
      */
 
     public $qr;
+    public $userid;
 
-    public function __construct($qr)
+    public function __construct($qr,$userid)
     {
         //
         $this->qr = $qr;
+        $this->userid = $userid;
     }
 
     /**
@@ -35,7 +37,11 @@ class SendQr implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('send-qr-event');
+        // return new Channel('send-qr-event');
+
+
+            return new PrivateChannel('send-qr-event-'.$this->userid);
+
     }
 
     public function broadcastWith()

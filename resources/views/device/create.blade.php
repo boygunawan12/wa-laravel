@@ -4,8 +4,8 @@
 
 
 <div class="form-group">
-<label>phone</label>
-<input type='text' class='form-control' name='phone' value=''>
+<label>Phone</label>
+<input type='text' class='form-control' name='phone' value='' placeholder="Enter your phone with country code (Ex: 628123456)">
 </div>
 		
 </form>

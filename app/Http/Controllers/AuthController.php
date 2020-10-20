@@ -15,6 +15,7 @@ use App\ForgotPassword as ForgotPasswordModel;
 
 use Webpatser\Uuid\Uuid;
 use App\Mail\ForgotPassword;
+use App\Setting;
 
 
 class AuthController extends Controller
@@ -42,6 +43,9 @@ class AuthController extends Controller
 	$userEmail = User::where('email',$email);
 
 	if ($userEmail->count()==0) {
+
+		$Setting = Setting::find(1);
+		$quota= $Setting->quota;
 		# code...
 
 		$user = new User;
@@ -50,6 +54,8 @@ class AuthController extends Controller
 		$user->last_name = $lastname;
 		// $user->id_country = $country;
 		$user->password = bcrypt($password);
+		$user->quota = $quota;
+		$user->is_active = 1;
 		$user->save();
 
 
@@ -69,7 +75,7 @@ class AuthController extends Controller
 		// $request->session()->put('userid', $user->id);
 		return [
 			'success'=>true,
-			'msg'=>'please check your email/spam inbox to verify your account'
+			'msg'=>'Successfully registered, Please check your email/spam inbox to verify your account'
 		];
 
 		}
@@ -132,10 +138,21 @@ class AuthController extends Controller
 				if (!$userdb->verified) {
 					# code...
 
-	return [
-			'success'=>false,
-			'msg'=>'Your account has not been verified, please check your email for account activation'
-		];
+			return [
+						'success'=>false,
+						'msg'=>'Your account has not been verified, please check your email for account activation'
+				];
+				}
+
+
+				if (!$userdb->is_active) {
+					# code...
+					return [
+						'success'=>false,
+						'msg'=>'Your account is disabled'
+				];
+				
+
 				}
 			$request->session()->put('userid', $userdb->id);
 				

@@ -11,7 +11,7 @@
 <div class="content">
                 <div class="page-inner">
                     <div class="page-header">
-                        <h4 class="page-title">Welcome</h4>
+                        <h4 class="page-title">Chat</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
                                 <a href="#">
@@ -22,9 +22,31 @@
                                 <i class="flaticon-right-arrow"></i>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Welcome</a>
+                                <a href="#">Chat</a>
                             </li>
                         </ul>
+                    </div>
+                       <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card card-stats card-primary card-round">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="icon-big text-center">
+                                                <i class="flaticon-chat"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-stats">
+                                            <div class="numbers">
+                                                <p class="card-category">Quota Left</p>
+                                                <h4 class="card-title">{{$quotaLeft}}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
                     </div>
                     <div class="row">
 
@@ -47,8 +69,10 @@
         $file = $request->file('file'); --}}
             <div class="form-group">
                 <label>Device</label>
-                <select name="deviceId" class="select2 form-control" data-url="{{ url('device/list') }}"></select>
+                <select name="device" class="select2 form-control" data-url="{{ url('device/list') }}"></select>
             </div>
+
+
 
             <div class="form-group">
                 <label>Phone</label>
@@ -72,9 +96,7 @@
     </form>     
 
         </div>
-        <div class="col-lg-6">
-            <h5>Response</h5>
-        </div>
+       
     </div>       
 
 </div>
@@ -99,7 +121,7 @@
                     $(document).on('click', '.btn-send', function() {
                         // event.preventDefault();
                         $(this).attr('disabled','disabled');
-  var formData = new FormData($("#form")[0]);
+                        var formData = new FormData($("#form")[0]);
 
                         $.ajax({
                             headers:{
@@ -109,7 +131,7 @@
                             type: 'POST',
                             dataType: 'JSON',
                             data: formData,
-                            
+
             contentType: false,
             processData: false,
                         })
@@ -127,6 +149,9 @@
                                   type: 'success'
                                 });
 
+                                setTimeout(function(){
+                                    location.reload();
+                                },1000);
 
                             }
                             else{
@@ -141,14 +166,40 @@
                                       type: 'danger'
                                     });
 
+  $(".btn-send").removeAttr('disabled');
+                                    
+
 
                             }
 
                             $(".btn-send").removeAttr('disabled');
                             // console.log("success");
                         })
-                        .fail(function() {
-                            console.log("error");
+                        .fail(function(data) {
+                            
+
+  // console.log(data);
+  if (data.status==422) {
+        $(".save-btn").removeAttr('disabled');
+
+      $('input').removeClass('is-invalid');
+      $('select').removeClass('is-invalid');
+      $(".invalid-feedback").remove();
+
+    // console.log(data.responseJSON);
+    $.each(data.responseJSON.errors, function(index,val) {
+      // console.log(index);
+      // console.log(val);
+      $('[name='+index+']').after("");
+
+      $('[name='+index+']').addClass('is-invalid');
+      var msg = '<div class="invalid-feedback">'+val+'</div>';
+      $('[name='+index+']').after(msg);
+       /* iterate through array or object */
+    });
+  }
+
+  $(".btn-send").removeAttr('disabled');
                         })
                         .always(function() {
                             console.log("complete");

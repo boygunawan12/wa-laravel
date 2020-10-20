@@ -31,6 +31,7 @@ class DeviceController extends Controller
     public function json(){
         $userid = user()->id;
 
+
           $data = Device::select([
 'device.phone',
 'device.id',
@@ -63,9 +64,14 @@ class DeviceController extends Controller
     {
         //
 
+
+        $userid = user()->id;
+        checkPhoneIsConnected($userid);
         $title = "List";
 
+// exit();
 
+        // $totalUser = 
           // $data = @Table::all();
         return view($this->dir.'/index',compact('title'));
     }
@@ -111,7 +117,7 @@ class DeviceController extends Controller
         $userid = user()->id;
 
     $validatedData = $request->validate([
-"phone" => "required" ,
+"phone" => "required|unique:device" ,
 
 ]);
 
@@ -210,7 +216,8 @@ class DeviceController extends Controller
      
 
     $validatedData = $request->validate([
-"phone" => "required" ,
+"phone" => "required|unique:device,phone,".$id ,
+
 
 ]);
 
@@ -285,6 +292,7 @@ $save = $device->save();
         // echo "string";
             $response = Http::get('http://localhost:3000/whatsapp', [
                 'phone' => $phone,
+                'userid' => user()->id,
                 // 'page' => 1,
             ]);
         // print_r($response);
@@ -295,10 +303,11 @@ $save = $device->save();
 
     public function sendQr(Request $request){
         $qr = $request->qr;
+        $userid = $request->userid;
 
 
 
-        broadcast(new \App\Events\SendQr($qr));
+        broadcast(new \App\Events\SendQr($qr,$userid));
 
         return [
             'success'=>true,
@@ -312,13 +321,15 @@ $save = $device->save();
 
         $state = $request->state;
         $phone = $request->phone;
+        $userid = $request->userid;
+
 
         if ($state=='open') {
             # code...
 
             $device = Device::where(['phone'=>$phone])->update(['status'=>'1']);
 
-            broadcast(new \App\Events\StateOpen($phone));
+            broadcast(new \App\Events\StateOpen($phone,$userid));
 
         }
         else{
@@ -334,7 +345,7 @@ $save = $device->save();
     }
 
     public function list(){
-        $data = Device::select(['phone as text','id'])->where('userid',user()->id);
+        $data = Device::select(['phone as text','phone as id'])->where('userid',user()->id);
 
         return $data->get();
     }
