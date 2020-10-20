@@ -97,6 +97,13 @@
 						@endif
 
 
+						<li class="nav-item {{sidebarActive('billing')}}">
+							<a href="{{ url('billing') }}">
+							<i class="fas fa-file-invoice"></i> 
+								<p>Billing</p>
+							</a>
+						</li>
+
 						<li class="nav-item {{sidebarActive('documentation')}}">
 							<a href="https://documenter.getpostman.com/view/7844430/TVYAggS4" target="_blank">
 							<i class="fas fa-users"></i> 

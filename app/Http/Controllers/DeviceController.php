@@ -46,8 +46,9 @@ class DeviceController extends Controller
     $pair .='';
     if ($d->status==0) {
         # code...
-        $pair .= '<button title="Pair" data-save="false" class="btn btn-info pair-btn btn-sm create-btn" data-src="'.url($this->url.'/'.$d->id.'/pair').'"><i class="fas fa-qrcode"></i></button>';
+        $pair .= '<button title="Pair" data-save="false" class="btn btn-info pair-btn btn-sm "  data-toggle="modal" data-target="#pairModal" data-id="'.$d->id.'" data-phone="'.$d->phone.'" data-src="'.url($this->url.'/'.$d->id.'/pair').'"><i class="fas fa-qrcode"></i></button>';
     }
+
 
     return $pair;
 

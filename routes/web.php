@@ -73,6 +73,10 @@ Route::get("/device/{id}/pair","DeviceController@pair")->name("device.pair");
 Route::post('device/send-state-open', 'DeviceController@connect');
 Route::get('/user/verify/{token}', 'AuthController@verifyUser');
 
+Route::get('billing', function() {
+    //
+    return view('billing');
+});
 
 // chat/send-on-message
 Route::group(['prefix' => 'api','middleware'=>'ApiMiddleware'], function() {
