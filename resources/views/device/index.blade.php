@@ -217,6 +217,9 @@ $(function() {
 
 $(document).on('click', '.pair-btn', function() {
     // event.preventDefault();
+
+
+    $("#qrcode").html('');
     var id = $(this).attr('data-id')
     var phone = $(this).attr('data-phone')
     $(".wrap-loader").html('<center><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>');
