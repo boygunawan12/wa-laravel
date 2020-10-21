@@ -88,3 +88,8 @@ Route::group(['prefix' => 'api','middleware'=>'ApiMiddleware'], function() {
 });
 
 
+
+Route::get('email', 'SendMailController@sendEmail');
+Route::get('c', 'SendMailController@sendEmailQueues');
+
+

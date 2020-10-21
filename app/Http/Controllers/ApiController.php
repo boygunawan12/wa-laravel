@@ -8,6 +8,7 @@ use App\Chat;
 use App\ChatSend;
 use Illuminate\Support\Facades\Http;
 
+use App\Jobs\SendChatJob;
 
 
 
@@ -252,46 +253,23 @@ if ($validator->fails()) {
 
 
 
-        $sendTo = $phone.'@s.whatsapp.net';
-        // $sendTo = '6281215416084-1564231374@g.us';
+        $job = (new SendChatJob($phone,$fromDevice,$message,$user->id));
+        dispatch($job);
+        // echo "send mail with queues";
 
 
-              $response = Http::get('http://localhost:3000/chat/send', [
-                'phone' => $sendTo,
-                'fromDevice' => $fromDevice,
-                'message' => $message,
-            ]);
-        // print_r($response);
 
-        $body =$response->body();
-        $decode = json_decode($body);
-        // print_r($decode);
-        $status = @$decode->status;
 
+        return [
+            'success'=>true,
+            'msg'=>'Success, messages are queued'
+        ];
 
         }
 
+// echo "string";
 
-        if ($status==401) {
-
-            $device = Device::where(['phone'=>$fromDevice])->update(['status'=>'0']);
-
-            # code...
-
-            return [
-                'success'=>false,
-                'msg'=>'Sorry, Your Device is Unauthorized'
-            ];
-
-        }
-        else{
-            sendChat($userid);
-
-            return [
-                'success'=>true,
-                'msg'=>'Message Sent'
-            ];
-        }
+       
 
 
     }

@@ -50,6 +50,10 @@ class DeviceController extends Controller
     }
 
 
+        $pair .= ' <a title="Pair"  class="btn btn-info btn-sm "  data-id="'.$d->id.'" data-phone="'.$d->phone.'" href="http://localhost/pesandigital/public/chat?phone='.$d->phone.'" target="_blank"><i class="flaticon-chat"></i></a>';
+
+
+
     return $pair;
 
 
