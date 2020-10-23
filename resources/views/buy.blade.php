@@ -43,7 +43,7 @@
 	<script language="JavaScript">
 
 
-		var phone = ['62895361034833','6281230339271','6281327010080','628982382323'];
+		var phone = ['62895361034833','6281230339271','6281327010080','6285156833407'];
 		var i = parseInt(Math.random() * 3)
 
 		var desc ="Halo, Saya Tertarik dengan Aplikasi Whatsapp Gatewaynya Minta Info Dong";
