@@ -75,8 +75,8 @@
 
 
             <div class="form-group">
-                <label>Phone</label>
-                <input type="text" name="to" class="form-control">
+                <label>To</label>
+                <input type="text" name="to" class="form-control" placeholder="with country code">
             </div>
 
             <div class="form-group">
