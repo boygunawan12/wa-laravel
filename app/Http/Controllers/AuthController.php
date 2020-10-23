@@ -29,7 +29,7 @@ class AuthController extends Controller
     $validatedData = $request->validate([
 "firstname" => "required" ,
 // "country"=>"required",
-    'email' => 'required|string|email|max:255|unique:users|regex:/gmail|ymail]/',
+"email"=>"required|email",
 "password"=>"required|confirmed|min:6"
 
 ]);
