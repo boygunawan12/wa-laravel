@@ -45,9 +45,6 @@ Route::get("/users/json","UserController@json")->name("users.json");
 Route::resource("/users","UserController");
 
 
-Route::get("/affiliates/json","AffiliateController@json")->name("affiliates.json");
-Route::resource("/affiliates","AffiliateController");
-
 
 Route::get('test-broadcast', function(){
     broadcast(new \App\Events\SendQr("x"));
@@ -88,8 +85,7 @@ Route::group(['prefix' => 'api','middleware'=>'ApiMiddleware'], function() {
 });
 
 
-
-Route::get('email', 'SendMailController@sendEmail');
-Route::get('c', 'SendMailController@sendEmailQueues');
-
-
+Route::get('kontak', function() {
+    //
+    return view('buy');
+});

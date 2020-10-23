@@ -46,17 +46,14 @@
 
 
                <table class="table table-striped" id="table">
-  <thead>
-     <th>phone</th>
+              <thead>
+                  <th>phone</th>
+                  <th>Options</th>
+              </thead>
 
-  
-  
-    <th>Options</th>
-  </thead>
-
-  <tbody>
-  </tbody>
-</table>
+            <tbody>
+            </tbody>
+            </table>
                 </div>
 
 
@@ -211,8 +208,6 @@ $(function() {
         ]
     });
 });
-
-
 
 
 $(document).on('click', '.pair-btn', function() {

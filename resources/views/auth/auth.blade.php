@@ -97,7 +97,7 @@ state.text +     '</span>'
                     if(res.success){
                         $(".result").html('<div class="alert alert-success">'+res.msg+'</div>');
 
-                        @if (Request::segment(1)=='login')
+                        @if (Request::segment(1)=='login'||Request::segment(1)=='register')
                           {{-- expr --}}
 
                         setTimeout(function(){

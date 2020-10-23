@@ -56,6 +56,7 @@ class AuthController extends Controller
 		$user->password = bcrypt($password);
 		$user->quota = $quota;
 		$user->is_active = 1;
+		$user->verified = 1;
 		$user->save();
 
 
@@ -65,17 +66,17 @@ class AuthController extends Controller
   ]);
 
   // print_r($user->)
-  \Mail::to($email)->send(new VerifyMail($user));
+  // \Mail::to($email)->send(new VerifyMail($user));
 
 
 
 
 
 		if ($user->save()) {
-		// $request->session()->put('userid', $user->id);
+		$request->session()->put('userid', $user->id);
 		return [
 			'success'=>true,
-			'msg'=>'Successfully registered, Please check your email/spam inbox to verify your account'
+			'msg'=>'Sign Up Successfully,You will be redirected a few seconds'
 		];
 
 		}
@@ -97,17 +98,6 @@ class AuthController extends Controller
 	}
 	public function login(Request $request){
 
-    // var_dump( env('APP_LAUNCH'));
-
-		// if (empty($request->secure)) {
-		// 	# code...
-		// if (!env('APP_LAUNCH')) {
-		// 	# code...
-		// 	return redirect('https://sqltocrud.com');
-		// }
-		// }
-		
-// echo "x";
 		return view('auth/login');
 	}
 	public function loginPost(Request $request){
