@@ -212,7 +212,7 @@ CREATE TABLE `verify_user` (
   `id` int(11) NOT NULL,
   `token` varchar(100) DEFAULT NULL,
   `userid` varchar(100) DEFAULT NULL,
-  `created_at` time NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
